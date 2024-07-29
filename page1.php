@@ -177,8 +177,8 @@
     <footer>
         <p>&copy; 2024 Meurtre Facile. Tous droits réservés.</p>
         <a href="page2.php">
-    <button>Projet Sylvie</button>
-    </a>
+            <button>Ajouter au panier</button>
+        </a>
     
     </footer>
 

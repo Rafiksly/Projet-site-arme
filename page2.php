@@ -2,23 +2,26 @@
 session_start();
 
           // ne pas oublier Inclure le fichier contenant les produits php
-         
-        
-        
+
 include("produits.php");
 
-         // Récupérer l'ID du produit sélectionné
+         // Récupérer l'ID du produit sélectionné via get valeur par defaut ??  ET ZERO
 
 $choix = $_GET["id"] ?? 0;
+
+//!isset verifie  si le panier est déjà initialisé si non, creation panier
 if (!isset($_SESSION['panier'])){
     $_SESSION['panier'] = array();
 }
-       // creation de mes  variables elles vont vérifier si le produit existe ;)
+       // creation  variable 
 
 $produit = array();
-//variable  par defaut confirme que article pas trouvé 
+
+// CREATION DE LA VARIABLE confirme que article pas trouvé 
+
 $produitExiste = false; 
-// boucle speciale pour tableau associatif
+
+//   boucle speciale pour tableau associatif
 foreach ($produits as $p) {
     if ($p["id"] == $choix) {
         $produit = $p;
@@ -41,7 +44,7 @@ foreach ($produits as $p) {
 <header>
         <img src= "image/logo.png" width="200px" id="logo">
         <h1>Meurtre Facile</h1>
-    </header>
+</header>
     <nav>
             <p><a href="page1.php">Accueil</a></p>
             <p><a href="#archerie">Archerie</a></p>
@@ -52,36 +55,34 @@ foreach ($produits as $p) {
     </nav>
 
 <main>
-                <!--produit -->
 
     <div> 
-        <main>
+        <!--<main>-->
             
-             <div class="bloc1">
+            <div class="bloc1">
                 
-           <?php if ($produitExiste): ?>
+        <?php if ($produitExiste): ?>
 
-            <div class="product-image">
-            <img src="<?=$produits[$choix-1]["image"];?>"> </p>
-    </div>
+
+               <div class="product-image">
+               <img src="<?=$produits[$choix-1]["image"];?>"> </p>
+            </div>
 
            <div class="product-details">
 
                 <h2><?=$produits[$choix-1]['name'];?></h2>
                 <p class="description"><?=$produits[$choix-1]["overview"];?></p>
-                <!--<div class="product-image">-->
-
-                
                 <p class="price"><?=$produits[$choix-1]["price"];?> €</p>
                 
                 <a href="ajout.php?id=<?=$choix;?>"><button class="panier">Ajouter au Panier</button></a>
+
             </div>
     </div>
-                 <?php else: ?>
-    <div class="erreur">
+         <?php else: ?>
+                <div class="erreur">
                   <p>Erreur : Produit non trouvé.</p>
-            </div>
-                <?php endif; ?>
+                </div>
+        <?php endif; ?>
 
     </main>
  
